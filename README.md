@@ -1,4 +1,4 @@
-# OscilloscopeDisplay
+# Oscilloscope Display
  Turns an oscilloscope into a display.
  
  ## Video Demo
