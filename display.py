@@ -4,6 +4,7 @@ import numpy as np
 import sounddevice as sd
 from scipy import signal
 from scipy.io.wavfile import write
+import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from opacity import opacity_positive, opacity_negative
@@ -95,7 +96,7 @@ def oscilloscope(frames):
 
 
 if __name__ == '__main__':
-    oscilloscope(np.random.randint(3, size=(10 * freq_hz, resolution, resolution)))
+    oscilloscope(np.zeros((1 * freq_hz, resolution, resolution)).astype(int))
 
     # print(frames.shape)
     # frames = np.zeros((int(30 * fps), resolution, resolution), dtype=int)
