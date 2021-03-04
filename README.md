@@ -17,6 +17,7 @@
  * Scipy~=1.6.1  
 
 ## Run
+Tests run on Ubuntu 18.04 remotely from PyCharm, Windows not tested.
  * Generate audio from video: python3 play.py
  * Display driver only: python3 display.py
  * Draw circle: python3 test.py
