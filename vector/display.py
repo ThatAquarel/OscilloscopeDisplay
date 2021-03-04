@@ -17,7 +17,7 @@ def oscilloscope(frames):
 
     print("Generating Waves")
     for i, frame in enumerate(tqdm(frames)):
-        ii = int(i * (sps / fps))
+        ii = i * spf
         (x, y) = frame
         x = x / resolution
         y = y / resolution
@@ -35,8 +35,10 @@ def oscilloscope(frames):
 
     out = np.column_stack([x_audio, y_audio])
 
+    print("Write audio file")
     write(file.format(".wav"), sps, out.astype(np.float32))
 
+    print("Play audio file")
     sd.play(out, sps)
     time.sleep(duration)
     sd.stop()

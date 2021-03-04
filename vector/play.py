@@ -18,18 +18,15 @@ def main():
         if not ret:
             break
 
-        frame = cv2.flip(frame, 0)
-        frame = cv2.resize(frame, (resolution, resolution), interpolation=cv2.INTER_AREA)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.resize(gray, (resolution, resolution), interpolation=cv2.INTER_AREA)
         edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+        edges = cv2.flip(edges, 0)
 
         edges = edges / 255
-
-        edges[(0 <= edges) & (edges < 0.5)] = 0
         edges[(0.5 <= edges) & (edges < 1)] = 1
 
-        x, y = np.where(edges == 1)
-        frames.append((x, y))
+        frames.append(np.where(edges == 1))
 
     oscilloscope(frames)
 
