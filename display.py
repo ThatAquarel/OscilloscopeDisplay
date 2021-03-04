@@ -4,7 +4,6 @@ import numpy as np
 import sounddevice as sd
 from scipy import signal
 from scipy.io.wavfile import write
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from config import opacity_positive, opacity_negative, file
