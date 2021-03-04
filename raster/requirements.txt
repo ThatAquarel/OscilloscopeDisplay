@@ -1,0 +1,6 @@
+opencv-python~=4.5.1.48
+numpy~=1.20.1
+tqdm~=4.58.0
+matplotlib~=3.3.4
+sounddevice~=0.4.1
+scipy~=1.6.1
