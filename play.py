@@ -4,17 +4,19 @@ from tqdm import tqdm
 
 from display import fps, resolution, oscilloscope
 
+from config import file
+
 
 def main():
     print("Reading video")
-    cap = cv2.VideoCapture("./video.mp4")
+    cap = cv2.VideoCapture(file.format(".mp4"))
 
     frames = []
     for _ in tqdm(range(60 * fps)):
         ret, frame = cap.read()
 
         if not ret:
-            break
+            raise Exception("Video not readable")
 
         frame = cv2.resize(frame, (resolution, resolution), interpolation=cv2.INTER_AREA)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

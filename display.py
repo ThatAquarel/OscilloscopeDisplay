@@ -7,7 +7,7 @@ from scipy.io.wavfile import write
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-from opacity import opacity_positive, opacity_negative
+from config import opacity_positive, opacity_negative, file
 
 sps = 44100
 freq_hz = 90
@@ -28,24 +28,21 @@ def negate_frames(frames):
     return out
 
 
-def double_frames(frames):
-    print("Doubling frames for better shades")
+def triple_frames(frames):
+    print("Tripling frames for fitting refresh rate")
     out = []
-    # double = frames.copy() - 1
-    copy = frames.copy()
-    double = np.where(copy == 2, 1, copy)
-    double = np.where(double == 1, 0, double)
 
     for i in tqdm(range(frames.shape[0])):
         out.append(frames[i])
-        out.append(double[i])
+        out.append(frames[i])
+        out.append(frames[i])
 
     return np.array(out)
 
 
 # noinspection PyUnresolvedReferences
 def oscilloscope(frames):
-    frames = double_frames(frames)
+    frames = triple_frames(frames)
 
     duration = int(frames.shape[0] / freq_hz)
 
@@ -85,7 +82,7 @@ def oscilloscope(frames):
     time.sleep(duration)
     sd.stop()
 
-    write("output.wav", sps, out.astype(np.float32))
+    write(file.format(".wav"), sps, out.astype(np.float32))
 
     # plt.plot(x)
     # plt.plot(y)
