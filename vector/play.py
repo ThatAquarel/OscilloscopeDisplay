@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-from vector.config import fps, resolution, file
+from vector.config import resolution, sps, file
 from vector.display import oscilloscope
 
 
@@ -13,7 +13,7 @@ def main():
 
     frames = []
 
-    for _ in tqdm(range(240 * fps)):
+    for _ in tqdm(range(int(cap.get(cv2.CAP_PROP_FRAME_COUNT)))):
         ret, frame = cap.read()
         if not ret:
             break
@@ -28,7 +28,11 @@ def main():
 
         frames.append(np.where(edges == 1))
 
-    oscilloscope(frames)
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    spf = int(sps / fps)
+    cap.release()
+
+    oscilloscope(frames, fps, spf)
 
 
 if __name__ == '__main__':

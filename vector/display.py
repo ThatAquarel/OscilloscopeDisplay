@@ -5,11 +5,11 @@ import sounddevice as sd
 from tqdm import tqdm
 from scipy.io.wavfile import write
 
-from vector.config import resolution, sps, fps, spf, file
+from vector.config import resolution, sps, file
 
 
 # noinspection PyUnresolvedReferences
-def oscilloscope(frames):
+def oscilloscope(frames, fps, spf):
     duration = int(len(frames) / fps)
 
     x_audio = np.zeros(duration * sps)
